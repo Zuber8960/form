@@ -1,5 +1,6 @@
 let form=document.getElementById('my-form');
 let itemList=document.getElementById('users');
+let liTag;
 
 localStorage.setItem('zuberahmad8960@gmail.com','{"name":"Zuber","email":"zuberahmad8960@gmail.com"}');
 let li=document.createElement('li');
@@ -25,7 +26,7 @@ function addItem(e){
         return  alert("field is empty?");
     }
 
-    let liTag =itemList.querySelectorAll('li');
+    liTag =itemList.querySelectorAll('li');
     console.log(liTag);
 
     Array.from(liTag).forEach(function(item){
@@ -55,22 +56,31 @@ function addItem(e){
     itemList.appendChild(li);
 }
 
-
 //create edit button
 
 //delete itam event
 itemList.addEventListener('click',removeItem);
+
 function removeItem(e){
-    // console.log(1);
+    console.log(1);
     if(e.target.classList.contains('delete')){
         // console.log(1);
         if(confirm('Are you sure?')){
             li=e.target.parentElement;
+
+            let key=li.childNodes[2].textContent;
+            key=JSON.stringify(key);
+            // console.log(key);
+            localStorage.removeItem(JSON.parse(key));
+
             itemList.removeChild(li);
         }
-
     }
 }
+
+
+
+
 
 
 
